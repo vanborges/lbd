@@ -84,7 +84,7 @@ INSERT INTO dependente (fcpf, nome_dependente, sexo, datanasc, parentesco) VALUE
 
 -- depto_localizacoes
 INSERT INTO depto_localizacoes (dnumero, dlocal) VALUES (1, 'Houston');
-INSERT INTO depto_localizacoes (dnumero, dlocal) VALUES (4, 'Stanfford');
+INSERT INTO depto_localizacoes (dnumero, dlocal) VALUES (4, 'Stanford');
 INSERT INTO depto_localizacoes (dnumero, dlocal) VALUES (5, 'Bellaire');
 INSERT INTO depto_localizacoes (dnumero, dlocal) VALUES (5, 'Sugarland');
 INSERT INTO depto_localizacoes (dnumero, dlocal) VALUES (5, 'Houston');
@@ -94,9 +94,9 @@ INSERT INTO depto_localizacoes (dnumero, dlocal) VALUES (5, 'Houston');
 INSERT INTO projeto (projnome, projnumero, projlocal, dnum) VALUES ('ProdutoX', 1, 'Bellaire', 5);
 INSERT INTO projeto (projnome, projnumero, projlocal, dnum) VALUES ('ProdutoY', 2, 'Sugarland', 5);
 INSERT INTO projeto (projnome, projnumero, projlocal, dnum) VALUES ('ProdutoZ', 3, 'Houston', 5);
-INSERT INTO projeto (projnome, projnumero, projlocal, dnum) VALUES ('Automatizacao', 10, 'Stanfford', 4);
+INSERT INTO projeto (projnome, projnumero, projlocal, dnum) VALUES ('Automatizacao', 10, 'Stanford', 4);
 INSERT INTO projeto (projnome, projnumero, projlocal, dnum) VALUES ('Reorganizacao', 20, 'Houston', 1);
-INSERT INTO projeto (projnome, projnumero, projlocal, dnum) VALUES ('Novos_Beneficios', 30, 'Stanfford', 4);
+INSERT INTO projeto (projnome, projnumero, projlocal, dnum) VALUES ('Novos_Beneficios', 30, 'Stanford', 4);
 
 
 -- trabalha_em
