@@ -2,7 +2,7 @@
 https://labs.play-with-docker.com/
 
 
-# Docker Postgres
+# Docker PostgreSQL
 
 Exemplo de uso do Docker + Postgres, para execultar o exemplo basta execultar.
 
