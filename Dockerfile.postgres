@@ -1,3 +1,2 @@
-FROM postgres
+FROM postgres:latest
 COPY resources/dump.postgres.sql /docker-entrypoint-initdb.d/
-EXPOSE 5432

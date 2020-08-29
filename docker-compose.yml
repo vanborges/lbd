@@ -7,27 +7,31 @@ services:
     image: postgres_container
     container_name: postgres_container
     ports:
-      - 5432:5432
+      - 5432
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     volumes:
-      - "./postgres/bk:/bk"
-      - "./postgres/data:/var/lib/postgresql/data"
+      - "./postgres-data/data:/var/lib/postgresql/data"
     networks:
       network-banco:
         ipv4_address: 174.20.0.2
 
   pgAdmin4:
     container_name: pgAdmin4-interface
-    image: dpage/pgadmin4
+    image: dpage/pgadmin4:latest
     environment:
       PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin.org
       PGADMIN_DEFAULT_PASSWORD: pgadmin4
     depends_on: 
       - postgres
     ports:
-      - 8080:80
+      - 80
+    volumes:
+      - "./pgadmin-data/pgadmin:/var/lib/pgadmin"
+      - "./pgadmin-data/certificate.cert:/certs/server.cert"
+      - "./pgadmin-data/certificate.key:/certs/server.key"
+      - "./pgadmin-data/pgadmin4:/pgadmin4/servers.json"
     networks:
       network-banco:
         ipv4_address: 174.20.0.3
