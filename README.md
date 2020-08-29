@@ -6,7 +6,7 @@ Este ambiente contém apenas algumas modificações para melhor usabilidade e pr
 ## **Atenção!!!**
 - **Este ambiente não contém o banco de dados disponibilizado pela Professora.**
 
-- **Apenas um banco vazio, com o *schema public* sem nenhuma tabela.**
+- **Apenas um banco vazio, com o *schema public* e sem nenhuma tabela.**
 
 ---
 
@@ -155,7 +155,7 @@ Após a alteração o serviço irá funcionar normalmente.
 Realize *login*:
 
 ```
-Email Address/Username: ```pgadmin4@pgadmin.org```
+Email Address/Username: pgadmin4@pgadmin.org
 Password: pgadmin4
 ```
 
