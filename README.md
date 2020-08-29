@@ -123,7 +123,13 @@ docker-compose up -d
 ## Como Parar o Ambiente
 Após a realização das atividades é possível destruir todos o *containers*, *networks* e *volumes* criados.
 
-Mas não se preocupe, é possível voltar a utilizar todo ambiente novamente sem perder nenhuma alteração realizada, tanto no banco quanto no *pgAdmin*, com o comando para subir o *compose* (```docker-compose up -d```).
+Mas não se preocupe, é possível voltar a utilizar todo ambiente novamente sem perder nenhuma alteração realizada, tanto no banco quanto no *pgAdmin* ao executar o comando para subir o *compose* (```docker-compose up -d```).
+
+### Destruindo o Ambiente
+
+```shell
+docker-compose down
+```
 
 ## Acessar o Ambiente
 
@@ -170,7 +176,7 @@ Após isso, configure o banco de dados:
         - Defina o nome do banco
 - *Connection*
     - Host name/address
-        - http://172.20.0.2
+        - `172.20.0.2`
     - Username
         - postgres
     - Password
@@ -204,7 +210,7 @@ cd postgres-data
 ```
 
 ### Uma Dica 😉
-- Execute ```ls -l``` para visualizar os usuários e os grupos aos quais o conteúdo pertence.
+- Execute ```ls -l``` dentro dos diretórios para visualizar os usuários e os grupos aos quais o conteúdo pertence.
 
 ### **Atenção!!!**
 - **Mantenha esses diretórios para não perder seu progresso!**
