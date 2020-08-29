@@ -1,12 +1,4 @@
 # Ambiente Para Execução das Atividades de LBD
-Este repositório é um *fork* do ambiente previamente disponibilizado pela Professora Vanessa Borges (FACOM - UFMS) durante as aulas de Laboratório de Banco de Dados.
-
-Este ambiente contém apenas algumas modificações para melhor usabilidade e produtividade durante a execução das atividades.
-
-## **Atenção!!!**
-- **Este ambiente não contém o banco de dados disponibilizado pela Professora.**
-
-- **Apenas um banco vazio, com o *schema public* e sem nenhuma tabela.**
 
 ---
 
@@ -134,9 +126,9 @@ docker-compose down
 ## Acessar o Ambiente
 
 ### *pgAdmin*
-Para abrir o *pgAdmin* deverá acessar o IP do *container*. No caso, é um IP estático e a porta é do serviço é a padrão (80).
+Para abrir o *pgAdmin* deverá acessar o IP do *container*. No caso, é um IP estático e a porta é do serviço é a padrão 80.
 
-- *pgAdmin*: http://172.20.0.3
+- *pgAdmin*: http://174.20.0.3
 
 ### **Configurações de Permissão!!!**
 Se você subiu o serviço e tentou acessar o *pgAdmin*, provavelmente se deparou com um problema (foi mal 😕). Isso ocorre devido a um erro de permissão, pois para NÃO perder os dados da sessão, estou *linkando* os arquivos dela na máquina *host* e assim eles persistem mesmo após a destruição do *container*. O que permite não ter que realizar a conexão com *postgres* sempre que subir o *compose*.
@@ -153,15 +145,14 @@ sudo chown -R 5050:5050 pgadmin-data
 
 O ID ```5050``` é o ID do usuário *pgadmin* que tem as permissões necessárias para lidar com os arquivos da sessão.
 
-Após a alteração o serviço irá funcionar normalmente.
-
+Após a alteração acesse a [URL](http://174.20.0.3) novamente e o serviço irá funcionar normalmente.
 
 ### Configurando *pgAdmin*
 
 Realize *login*:
 
 ```
-Email Address/Username: pgadmin4@pgadmin.org
+Username: pgadmin4@pgadmin.org
 Password: pgadmin4
 ```
 
@@ -176,11 +167,11 @@ Após isso, configure o banco de dados:
         - Defina o nome do banco
 - *Connection*
     - Host name/address
-        - `172.20.0.2`
+        - `174.20.0.2`
     - Username
-        - postgres
+        - `postgres`
     - Password
-        - postgres
+        - `postgres`
     - Save password
         - ✓
 
