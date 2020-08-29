@@ -1,43 +1,47 @@
 version: '3.7'
+
+networks:
+  network-banco:
+    name: network-postgres
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.20.0.0/29
+
 services:
   postgres:
-    build:
-      context: .
-      dockerfile: Dockerfile.postgres
-    image: postgres_container
-    container_name: postgres_container
+    image: postgres:latest
+    container_name: postgresdb
     ports:
-      - 5432:5432
+      - 5432
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     volumes:
-      - "./postgres/bk:/bk"
-      - "./postgres/data:/var/lib/postgresql/data"
+      - "./postgres-data/data:/var/lib/postgresql/data"
     networks:
       network-banco:
-        ipv4_address: 174.20.0.2
+        ipv4_address: 172.20.0.2
+    restart: unless-stopped
 
   pgAdmin4:
-    container_name: pgAdmin4-interface
-    image: dpage/pgadmin4
+    container_name: pgAdmin4
+    image: dpage/pgadmin4:latest
     environment:
       PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin.org
       PGADMIN_DEFAULT_PASSWORD: pgadmin4
     depends_on: 
       - postgres
     ports:
-      - 8080:80
+      - 80
+    volumes:
+      - "./pgadmin-data/pgadmin:/var/lib/pgadmin"
+      - "./pgadmin-data/certificate.cert:/certs/server.cert"
+      - "./pgadmin-data/certificate.key:/certs/server.key"
+      - "./pgadmin-data/pgadmin4:/pgadmin4/servers.json"
     networks:
       network-banco:
-        ipv4_address: 174.20.0.3
-
-networks:
-  network-banco:
-    driver: bridge
-    ipam:
-      driver: default
-      config:
-        - subnet: 174.20.0.0/24
-
+        ipv4_address: 172.20.0.3
+    restart: unless-stopped
         
