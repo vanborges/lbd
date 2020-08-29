@@ -60,7 +60,7 @@ E por último, mas não menos importante, também é possível instalar uma VM c
 # Docker-Compose
 Já o Docker-Compose é responsável por agilizar a criação, integração e configuração de um ou mais *containers*.
 
-Ele cria os conteiners e seus serviços integrando com os demais conforme configurado. Tudo isso, com um único comando. Tanto na criação como na destruição do serviço.
+Ele cria os *conteiners* e seus serviços integrando com os demais conforme configurado. Tudo isso, com um único comando. Tanto na criação como na destruição do ambiente.
 
 ## Instalação (Linux)
 Para realizar a instalação, tão simples como a do Docker, basta executar os seguintes comandos:
@@ -177,6 +177,38 @@ Após isso, configure o banco de dados:
         - postgres
     - Save password
         - ✓
+
+---
+
+# Mantendo Seus Projetos
+Todas as alterações realizadas tanto no banco quanto no *pgAdmin* estarão armazenadas nas pastas *pgadmin-data* e *postgres-data*.
+
+- ***pgadmin-data***: dados e configurações da sessão no *pgAdmin*
+- ***postgres-data***: dados e configurações do banco de dados *PostgreSQL*
+
+Caso deseje acessar esses diretórios você deve utilizar o usuário *root*.
+
+```shell
+# altera para usuário root
+sudo su
+```
+
+Para então acessar os diretórios:
+
+```shell
+# pgadmin-data
+cd pgadmin-data
+
+# postgres-data
+cd postgres-data
+```
+
+### Uma Dica 😉
+- Execute ```ls -l``` para visualizar os usuários e os grupos aos quais o conteúdo pertence.
+
+### **Atenção!!!**
+- **Mantenha esses diretórios para não perder seu progresso!**
+
 
 ---
 
