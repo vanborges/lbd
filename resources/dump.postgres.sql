@@ -1,43 +1,43 @@
 CREATE TABLE departamento (
-    dnome character varying(255) NOT NULL,
+    dnome varchar(255) NOT NULL,
     dnumero integer NOT NULL,
-    cpf_gerente varchar(11),
+    cpf_gerente varchar(11) NULL,
     data_inicio_gerente date
 );
 
 CREATE TABLE dependente (
     fcpf varchar(11) NOT NULL,
-    nome_dependente character varying(255) NOT NULL,
+    nome_dependente varchar(255) NOT NULL,
     sexo character(1),
     datanasc date,
-    parentesco character varying(255),
-    CONSTRAINT dependente_sexo_check CHECK ((sexo = ANY (ARRAY['F'::bpchar, 'M'::bpchar])))
+    parentesco varchar(255),
+    CONSTRAINT dependente_sexo_check CHECK (sexo IN ('F', 'M'))
 );
 
 CREATE TABLE depto_localizacoes (
     dnumero integer NOT NULL,
-    dlocal character varying(255) NOT NULL
+    dlocal varchar(255) NOT NULL
 );
 
 CREATE TABLE funcionario (
-    pnome character varying(255) NOT NULL,
+    pnome varchar(255) NOT NULL,
     minicial character(1),
-    unome character varying(255) NOT NULL,
-    cpf varchar(11) NOT NULL,
+    unome varchar(255),
+    cpf varchar(11),
     datanasc date,
-    endereco character varying(255),
+    endereco varchar(255),
     sexo character(2),
     salario numeric NOT NULL,
-    cpf_supervisor varchar(11),
+    cpf_supervisor varchar(11) NULL,
     dnr integer,
-    CONSTRAINT funcionario_sexo_check CHECK ((sexo = ANY (ARRAY['F'::bpchar, 'M'::bpchar])))
+    CONSTRAINT funcionario_sexo_check CHECK (sexo IN ('F', 'M'))
 );
 
 CREATE TABLE projeto (
-    projnome character varying(255),
+    projnome varchar(255),
     projnumero integer NOT NULL,
-    projlocal character varying(255),
-    dnum integer
+    projlocal varchar(255),
+    dnum integer NULL
 );
 
 CREATE TABLE trabalha_em (
@@ -45,13 +45,6 @@ CREATE TABLE trabalha_em (
     pnr integer NOT NULL,
     horas real
 );
-
-TRUNCATE TABLE funcionario CASCADE;
-TRUNCATE TABLE departamento CASCADE;
-TRUNCATE TABLE dependente CASCADE;
-TRUNCATE TABLE depto_localizacoes CASCADE;
-TRUNCATE TABLE projeto CASCADE;
-TRUNCATE TABLE trabalha_em CASCADE;
 
 
 -- funcionario
@@ -70,8 +63,8 @@ INSERT INTO funcionario (pnome, minicial, unome, cpf, datanasc, endereco, sexo, 
 INSERT INTO departamento (dnome, dnumero, cpf_gerente, data_inicio_gerente) VALUES ('Pesquisa', 3, '333445555','1988-05-22');
 INSERT INTO departamento (dnome, dnumero, cpf_gerente, data_inicio_gerente) VALUES ('Administracao',4, '987654321','1995-01-01');
 INSERT INTO departamento (dnome, dnumero, cpf_gerente, data_inicio_gerente) VALUES ('Sede_administrativa',1, '888665555','1981-06-19');
-INSERT INTO departamento (dnome, dnumero, cpf_gerente, data_inicio_gerente) VALUES ('Inovacao',7, '333445555', '1980-06-30');
-INSERT INTO departamento (dnome, dnumero, cpf_gerente, data_inicio_gerente) VALUES ('Computacao',5, '333445555', '1990-06-30');
+INSERT INTO departamento (dnome, dnumero, cpf_gerente, data_inicio_gerente) VALUES ('Inovacao',7, NULL, '1980-06-30');
+INSERT INTO departamento (dnome, dnumero, cpf_gerente, data_inicio_gerente) VALUES ('Computacao',5, NULL, '1990-06-30');
 
 -- dependente
 INSERT INTO dependente (fcpf, nome_dependente, sexo, datanasc, parentesco) VALUES ('333445555','Alice','F','1986-04-05','FILHA');
@@ -91,9 +84,9 @@ INSERT INTO depto_localizacoes (dnumero, dlocal) VALUES (5, 'Houston');
 
 
 -- projeto
-INSERT INTO projeto (projnome, projnumero, projlocal, dnum) VALUES ('ProdutoX', 1, 'Bellaire', 5);
-INSERT INTO projeto (projnome, projnumero, projlocal, dnum) VALUES ('ProdutoY', 2, 'Sugarland', 5);
-INSERT INTO projeto (projnome, projnumero, projlocal, dnum) VALUES ('ProdutoZ', 3, 'Houston', 5);
+INSERT INTO projeto (projnome, projnumero, projlocal, dnum) VALUES ('Projeto 1', 1, 'Bellaire', 5);
+INSERT INTO projeto (projnome, projnumero, projlocal, dnum) VALUES ('Projeto 2', 2, 'Sugarland', 5);
+INSERT INTO projeto (projnome, projnumero, projlocal, dnum) VALUES ('Projeto 3', 3, 'Houston', 5);
 INSERT INTO projeto (projnome, projnumero, projlocal, dnum) VALUES ('Automatizacao', 10, 'Stanford', 4);
 INSERT INTO projeto (projnome, projnumero, projlocal, dnum) VALUES ('Reorganizacao', 20, 'Houston', 1);
 INSERT INTO projeto (projnome, projnumero, projlocal, dnum) VALUES ('Novos_Beneficios', 30, 'Stanford', 4);
@@ -115,41 +108,46 @@ INSERT INTO trabalha_em (fcpf, pnr, horas) VALUES ('999887777', 10, 5);
 
 
 
-ALTER TABLE ONLY departamento
+ALTER TABLE departamento
     ADD CONSTRAINT departamento_pkey PRIMARY KEY (dnumero);
 
-ALTER TABLE ONLY dependente
+ALTER TABLE departamento ADD CONSTRAINT cpf_gerente_unique UNIQUE (cpf_gerente);
+
+ALTER TABLE dependente
     ADD CONSTRAINT dependente_pkey PRIMARY KEY (fcpf, nome_dependente);
 
-ALTER TABLE ONLY depto_localizacoes
+ALTER TABLE depto_localizacoes
     ADD CONSTRAINT depto_localizacoes_pkey PRIMARY KEY (dnumero, dlocal);
 
-ALTER TABLE ONLY funcionario
+ALTER TABLE funcionario
     ADD CONSTRAINT funcionario_pkey PRIMARY KEY (cpf);
 
-ALTER TABLE ONLY projeto
+ALTER TABLE projeto
     ADD CONSTRAINT projeto_pkey PRIMARY KEY (projnumero);
 
-ALTER TABLE ONLY trabalha_em
+ALTER TABLE trabalha_em
     ADD CONSTRAINT trabalha_em_pkey PRIMARY KEY (fcpf, pnr);
 
-ALTER TABLE ONLY departamento
+ALTER TABLE departamento
     ADD CONSTRAINT gerente FOREIGN KEY (cpf_gerente) REFERENCES funcionario(cpf);
 
-ALTER TABLE ONLY depto_localizacoes
-    ADD CONSTRAINT numerodepartamento FOREIGN KEY (dnumero) REFERENCES departamento(dnumero);
+ALTER TABLE depto_localizacoes
+    ADD CONSTRAINT dnumerolocal FOREIGN KEY (dnumero) REFERENCES departamento(dnumero);
 
-ALTER TABLE ONLY projeto
-    ADD CONSTRAINT numerodepartamento FOREIGN KEY (dnum) REFERENCES departamento(dnumero);
+ALTER TABLE projeto
+    ADD CONSTRAINT dnumprojeto FOREIGN KEY (dnum) REFERENCES departamento(dnumero);
 
-ALTER TABLE ONLY funcionario
+ALTER TABLE funcionario
     ADD CONSTRAINT numerodepto FOREIGN KEY (dnr) REFERENCES departamento(dnumero);
 
-ALTER TABLE ONLY trabalha_em
+ALTER TABLE trabalha_em
     ADD CONSTRAINT numeroprojeto FOREIGN KEY (pnr) REFERENCES projeto(projnumero);
 
-ALTER TABLE ONLY dependente
+ALTER TABLE trabalha_em
+    ADD CONSTRAINT cpftrabalhaem FOREIGN KEY (fcpf) REFERENCES funcionario(cpf);
+
+ALTER TABLE dependente
     ADD CONSTRAINT cpffuncionario FOREIGN KEY (fcpf) REFERENCES funcionario(cpf);
 
-ALTER TABLE ONLY funcionario
+ALTER TABLE funcionario
     ADD CONSTRAINT supervisor FOREIGN KEY (cpf_supervisor) REFERENCES funcionario(cpf);
