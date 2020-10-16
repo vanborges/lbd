@@ -1,3 +1,5 @@
+@author: Diego Bulhões - https://github.com/DiegoBulhoes/database-laboratory
+
 # Docker play
 https://labs.play-with-docker.com/
 
