@@ -31,6 +31,8 @@ O ip do servidor Postgres é 174.20.0.2
 User: postgres
 Password: postgres
 ```
+## Acessando o PSQL
+	docker exec -it postgres_container psql -U postgres
 
 ## Instalação do Docker
 
