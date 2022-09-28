@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3.7'
 services:
   postgres:
     build:
@@ -14,7 +14,6 @@ services:
     volumes:
       - "./postgres/bk:/bk"
       - "./postgres/data:/var/lib/postgresql/data"
-      - "./init-db.sql:/docker-entrypoint-initdb.d/init.sql"
     networks:
       network-banco:
         ipv4_address: 174.20.0.2
