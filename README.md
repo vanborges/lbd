@@ -25,7 +25,7 @@ User: pgadmin4@pgadmin.org
 Password: postgres
 ```
 
-O ip do servidor Postgres é 174.20.0.2
+O ip do servidor Postgres é 172.16.18.2
 
 ```
 User: postgres
