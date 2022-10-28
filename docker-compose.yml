@@ -1,10 +1,10 @@
-version: '3.7'
+version: "3.7"
 services:
   postgres:
     build:
       context: .
-    image: postgres_container
-    container_name: postgres_container
+      dockerfile: Dockerfile.postgres
+    container_name: postgres
     ports:
       - 5432:5432
     environment:
@@ -14,29 +14,27 @@ services:
       - "./postgres/bk:/bk"
       - "./postgres/data:/var/lib/postgresql/data"
     networks:
-      network-banco:
-        ipv4_address: 174.20.0.2
+      net_postgres:
+        ipv4_address: 172.16.18.2
 
   pgAdmin4:
-    container_name: pgAdmin4-interface
+    container_name: pgAdmin4
     image: dpage/pgadmin4
     environment:
-      PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin.org
-      PGADMIN_DEFAULT_PASSWORD: pgadmin4
-    depends_on: 
+      PGADMIN_DEFAULT_EMAIL: test@test.postgres.org
+      PGADMIN_DEFAULT_PASSWORD: postgres
+    depends_on:
       - postgres
     ports:
       - 8080:80
     networks:
-      network-banco:
-        ipv4_address: 174.20.0.3
+      net_postgres:
+        ipv4_address: 172.16.18.3
 
 networks:
-  network-banco:
+  net_postgres:
     driver: bridge
     ipam:
       driver: default
       config:
-        - subnet: 174.20.0.0/24
-
-        
+        - subnet: 172.16.18.0/24
