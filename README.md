@@ -22,7 +22,7 @@ O PGAdmin4 poderá ser acessado usando link http://0.0.0.0:8080 ou http://174.20
 
 ```
 User: pgadmin4@pgadmin.org
-Password: pgadmin4
+Password: postgres
 ```
 
 O ip do servidor Postgres é 174.20.0.2
