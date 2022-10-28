@@ -18,7 +18,7 @@ Para execultar em background use esse comando
 docker-compose up -d
 ```
 
-O PGAdmin4 poderá ser acessado usando link http://0.0.0.0:8080 ou http://174.20.0.3
+O PGAdmin4 poderá ser acessado usando link http://0.0.0.0:8080 ou http://172.16.18.3
 
 ```
 User: pgadmin4@pgadmin.org
