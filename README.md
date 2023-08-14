@@ -32,7 +32,7 @@ User: postgres
 Password: postgres
 ```
 ## Acessando o PSQL
-	docker exec -it postgres_container psql -U postgres
+	docker exec -it postgres psql -U postgres
 
 ## Instalação do Docker
 
